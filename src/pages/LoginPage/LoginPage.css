@@ -1,0 +1,95 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15vh 0;
+}
+
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 0;  
+}
+
+.card-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 60px;
+}
+
+.login-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.login-subtext {
+    font-size: 14px;
+    color: #838383;
+    text-align: center;
+}
+
+.input-container {
+    width: 100%;
+}
+
+.input-label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-signin {
+    width: 100%; 
+    padding: 10px;
+    background-color: #1B2734; 
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-text {
+    font-size: 13px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.create-account {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.toast {
+    font-size: 14px;
+}
+
+.error-message {
+    margin-top: 12px;
+    font-size: 13px;
+}
