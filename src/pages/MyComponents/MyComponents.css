@@ -1,0 +1,21 @@
+td, th {
+    font-size: 14px;
+    padding: 7px;
+}
+
+h2 {
+    margin-bottom: 0 !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: none !important;
+}
+
+.p-datatable-wrapper {
+    border: 0.5px solid #ededed;
+    border-radius: 7px;
+}
+
+.p-datatable .p-paginator-bottom {
+    border: none;
+}

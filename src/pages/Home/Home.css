@@ -1,0 +1,77 @@
+.home-container {
+    padding: 20px;
+}
+
+.greeting-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; 
+}
+
+.button-group .p-button {
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 20px; 
+}
+
+.p-button-success {
+    padding: 12px;
+    background-color: #A6CFFF;
+    border: none;
+    color: #1B2734;
+    font-weight: bold;
+}
+
+.p-button-outlined {
+    color: #7a7a7a
+}
+
+.component-title {
+    font-size: 15px;
+}
+
+.component-description {
+    font-size: 13px;
+    color: #747474;
+    margin-top: 0;
+}
+
+.user-greeting {
+    font-size: 50px; 
+    margin: 0;
+}
+
+.greeting-subtext {
+    font-size: 22px; 
+}
+
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.card-text {
+    flex-grow: 1; 
+}
+
+.card-text h4 {
+    margin: 0; 
+}
+
+.card-text p {
+    margin-top: 5px; 
+}

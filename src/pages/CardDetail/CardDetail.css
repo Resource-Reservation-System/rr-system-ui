@@ -1,0 +1,19 @@
+.card-detail {
+    padding: 20px;
+}
+
+.request-form {
+    margin-top: 20px;
+}
+
+.request-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.request-form textarea,
+.request-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
