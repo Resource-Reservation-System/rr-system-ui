@@ -1,0 +1,33 @@
+.p-sidebar-menu li {
+  margin: 10px;
+  font-size: 15px;
+}
+
+.p-sidebar-menu i {
+  margin: 10px;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #eae8e8;
+}
+
+.sidebar .active {
+  font-weight: bold;
+  color: #0f0d0d; 
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  line-height: 1.2;
+  font-size: 10px;
+}
+
+.sidebar-logo {
+  width: 40px;
+  margin-right: 12px;
+}
