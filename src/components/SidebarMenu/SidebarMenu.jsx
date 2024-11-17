@@ -5,6 +5,10 @@ import './SidebarMenu.css';
 
 const SidebarMenu = ({ visible, onHide }) => {
     const navigate = useNavigate();
+    
+    // Retrieve user role from localStorage
+    const userRole = localStorage.getItem('role'); // Assuming you store user role in localStorage
+    console.log(userRole);
 
     const handleLogout = async () => {
         try {
@@ -19,6 +23,7 @@ const SidebarMenu = ({ visible, onHide }) => {
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             localStorage.removeItem('username');
+            localStorage.removeItem('role'); // Remove role on logout
             navigate('/login');
         } catch (error) {
             console.error('Logout failed:', error);
@@ -43,14 +48,35 @@ const SidebarMenu = ({ visible, onHide }) => {
                     </NavLink>
                 </li>
                 <hr />
-                <li>
-                    <NavLink to="/rrs/users" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
-                        <i className="pi pi-users" style={{ marginRight: '8px' }}></i>
-                        Users
-                    </NavLink>
-                </li>
+                
+                {/* Render Users link only for admin */}
+                {userRole === 'admin' && (
+                    <li>
+                        <NavLink to="/rrs/users" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
+                            <i className="pi pi-users" style={{ marginRight: '8px' }}></i>
+                            Users
+                        </NavLink>
+                    </li>
+                )}
                 <hr />
-                <hr />
+
+                {/* Render Approval and Trends links only for staff */}
+                {userRole === 'staff' && (
+                    <>
+                        <li>
+                            <NavLink to="/rrs/approval" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
+                                <i className="pi pi-file-check" style={{ marginRight: '8px' }}></i>
+                                Approval
+                            </NavLink>
+                        </li>
+                        <hr />
+                    </>
+                )}
+
+                
+                
+                {(userRole === 'staff' || userRole === 'students') && (
+                <>
                 <li>
                     <NavLink to="/rrs/my-components" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
                         <i className="pi pi-th-large" style={{ marginRight: '8px' }}></i>
@@ -58,27 +84,30 @@ const SidebarMenu = ({ visible, onHide }) => {
                     </NavLink>
                 </li>
                 <hr />
+                
                 <li>
                     <NavLink to="/rrs/alerts" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
                         <i className="pi pi-bell" style={{ marginRight: '8px' }}></i>
                         Alerts
                     </NavLink>
-                </li>
+                        </li>
+                </>
+                )}
                 <hr />
-                <li>
-                    <NavLink to="/rrs/approval" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
-                        <i className="pi pi-file-check" style={{ marginRight: '8px' }}></i>
-                        Approval
-                    </NavLink>
-                </li>
-                <hr />
-                <li>
-                    <NavLink to="/rrs/trends" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
-                        <i className="pi pi-chart-line" style={{ marginRight: '8px' }}></i>
-                        Trends
-                    </NavLink>
-                </li>
-                <hr />
+
+                {userRole === 'staff' && (
+                    <>
+                        <li>
+                            <NavLink to="/rrs/trends" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
+                                <i className="pi pi-chart-line" style={{ marginRight: '8px' }}></i>
+                                Trends
+                            </NavLink>
+                        </li>
+                        <hr />
+                    </>
+                )}
+
+                {/* Render Logout option */}
                 <li onClick={handleLogout}>
                     <a href="#" className="sidebar-link">
                         <i className="pi pi-sign-out" style={{ marginRight: '8px' }}></i>

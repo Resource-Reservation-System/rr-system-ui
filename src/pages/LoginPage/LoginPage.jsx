@@ -7,8 +7,16 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false); // Loading state
 
     const handleLogin = async () => {
+        if (!email || !password) {
+            setErrorMessage('Please enter both email and password.');
+            return;
+        }
+
+        setLoading(true);
+
         try {
             const response = await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/auth/login`, {
                 method: 'POST',
@@ -22,17 +30,21 @@ const LoginPage = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Invalid credentials');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Invalid credentials'); // Use server message if available
             }
 
             const data = await response.json();
             console.log('Login successful:', data);
 
-            localStorage.setItem('token', data.token); 
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('role', data.role);
             navigate('/rrs/home');
         } catch (error) {
             setErrorMessage(error.message); 
             console.error('Login failed:', error);
+        } finally {
+            setLoading(false); // Reset loading state
         }
     };
 
@@ -69,8 +81,8 @@ const LoginPage = () => {
                     />
                 </div>
 
-                <button className="btn-signin" onClick={handleLogin}>
-                    Login
+                <button className="btn-signin" onClick={handleLogin} disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
                 </button>
 
                 {errorMessage && <p className="error-message" style={{ color: 'red' }}>{errorMessage}</p>}

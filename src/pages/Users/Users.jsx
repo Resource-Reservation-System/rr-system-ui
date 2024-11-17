@@ -150,8 +150,8 @@ const Users = () => {
 
     return (
         <div className="current-users">            
-            <Toast ref={toast} /> {/* Add Toast component */}
-            <h2>Current Custodians</h2>
+            <Toast ref={toast} />
+            <h2>Current Users</h2>
             <h4>All the registered users will be present here!</h4>
             <DataTable value={usersData} paginator rows={15} className="table-padding">
                 <Column 
