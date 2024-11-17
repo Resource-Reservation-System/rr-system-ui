@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import Home from './pages/Home/Home'; 
+import Users from './pages/Users/Users';
 import MyComponents from './pages/MyComponents/MyComponents';
 import Alerts from './pages/Alerts/Alerts';
 import Approval from './pages/Approval/Approval';
@@ -37,6 +38,7 @@ const App = () => {
 
                     <Route element={<ProtectedRoute />}>
                         <Route path="/rrs/home" element={<Home />} />
+                        <Route path="/rrs/users" element={<Users />} />
                         <Route path="/rrs/card-detail" element={<CardDetail />} />
                         <Route path="/rrs/my-components" element={<MyComponents />} />
                         <Route path="/rrs/alerts" element={<Alerts />} />

@@ -1,0 +1,48 @@
+td, th {
+    font-size: 14px;
+    padding: 7px;
+}
+
+h2 {
+    margin-bottom: 0 !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: none !important;
+}
+
+.p-datatable-wrapper {
+    border: 0.5px solid #ededed;
+    border-radius: 7px;
+}
+
+.p-datatable .p-paginator-bottom {
+    border: none;
+}
+
+.pi-times {
+    border: 0.5px solid rgb(6, 128, 185);
+    padding: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.user-edit {
+    font-size: 10px;
+    padding: 6px 12px;
+    margin: 10px;
+}
+
+.dropdown, .label {
+    margin: 12px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.p-dropdown-label .p-inputtext .p-placeholder {
+    font-size: 14px;
+}

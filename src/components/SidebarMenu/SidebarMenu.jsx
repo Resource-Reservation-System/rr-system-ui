@@ -44,6 +44,14 @@ const SidebarMenu = ({ visible, onHide }) => {
                 </li>
                 <hr />
                 <li>
+                    <NavLink to="/rrs/users" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
+                        <i className="pi pi-users" style={{ marginRight: '8px' }}></i>
+                        Users
+                    </NavLink>
+                </li>
+                <hr />
+                <hr />
+                <li>
                     <NavLink to="/rrs/my-components" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
                         <i className="pi pi-th-large" style={{ marginRight: '8px' }}></i>
                         My Components
