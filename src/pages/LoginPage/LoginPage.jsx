@@ -39,6 +39,10 @@ const LoginPage = () => {
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('role', data.role);
+            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('fullName', data.fullName);
+            localStorage.setItem('labInCharge', data.labInCharge);
+            localStorage.setItem('labIdInCharge', data.labIdInCharge);
             navigate('/rrs/home');
         } catch (error) {
             setErrorMessage(error.message); 

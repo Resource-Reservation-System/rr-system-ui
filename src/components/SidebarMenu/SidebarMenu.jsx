@@ -8,7 +8,6 @@ const SidebarMenu = ({ visible, onHide }) => {
     
     // Retrieve user role from localStorage
     const userRole = localStorage.getItem('role'); // Assuming you store user role in localStorage
-    console.log(userRole);
 
     const handleLogout = async () => {
         try {
@@ -48,17 +47,20 @@ const SidebarMenu = ({ visible, onHide }) => {
                     </NavLink>
                 </li>
                 <hr />
-                
+
+
                 {/* Render Users link only for admin */}
                 {userRole === 'admin' && (
-                    <li>
-                        <NavLink to="/rrs/users" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
-                            <i className="pi pi-users" style={{ marginRight: '8px' }}></i>
-                            Users
-                        </NavLink>
-                    </li>
+                    <>
+                        <li>
+                            <NavLink to="/rrs/users" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
+                                <i className="pi pi-users" style={{ marginRight: '8px' }}></i>
+                                Users
+                            </NavLink>
+                        </li>
+                        <hr />
+                    </>
                 )}
-                <hr />
 
                 {/* Render Approval and Trends links only for staff */}
                 {userRole === 'staff' && (
@@ -73,27 +75,25 @@ const SidebarMenu = ({ visible, onHide }) => {
                     </>
                 )}
 
-                
-                
-                {(userRole === 'staff' || userRole === 'students') && (
-                <>
-                <li>
-                    <NavLink to="/rrs/my-components" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
-                        <i className="pi pi-th-large" style={{ marginRight: '8px' }}></i>
-                        My Components
-                    </NavLink>
-                </li>
-                <hr />
-                
-                <li>
-                    <NavLink to="/rrs/alerts" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
-                        <i className="pi pi-bell" style={{ marginRight: '8px' }}></i>
-                        Alerts
-                    </NavLink>
+                {(userRole === 'staff' || userRole === 'student') && (
+                    <>
+                        <li>
+                            <NavLink to="/rrs/my-components" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
+                                <i className="pi pi-th-large" style={{ marginRight: '8px' }}></i>
+                                My Components
+                            </NavLink>
                         </li>
-                </>
+                        <hr />
+                        
+                        <li>
+                            <NavLink to="/rrs/alerts" onClick={onHide} className={({ isActive }) => (isActive ? 'active' : '')}>
+                                <i className="pi pi-bell" style={{ marginRight: '8px' }}></i>
+                                Alerts
+                            </NavLink>
+                        </li>
+                        <hr />
+                    </>
                 )}
-                <hr />
 
                 {userRole === 'staff' && (
                     <>

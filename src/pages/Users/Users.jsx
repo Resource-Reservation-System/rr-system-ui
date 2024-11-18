@@ -27,6 +27,7 @@ const Users = () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/labs`);
             const data = await response.json();
+            console.log(data)
             // Add an option for resetting lab assignment
             setAvailableLabs([{ name: 'No Lab Assigned', id: null }, ...data]); // Assuming each lab has a name and id property
         } catch (error) {
@@ -74,14 +75,19 @@ const Users = () => {
         }
 
         try {
+            console.log("selected lab")
+            console.log(selectedLab)
+            console.log("selected user")
+            console.log(selectedUser)
             // Prepare data for updating user
             const updatedData = { 
                 labInCharge: selectedLab ? selectedLab.name : null,
-                role: selectedLab && selectedLab.id !== null ? 'staff' : selectedUser.role // Update role to staff if a valid lab is assigned
+                labIdInCharge: selectedLab ? selectedLab._id : null, // Store lab ID
+                role: selectedLab && selectedLab._id !== null ? 'staff' : selectedUser.role // Update role to staff if a valid lab is assigned
             };
 
             // Update labInCharge and role for the selected user
-            await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${selectedUser.userId}`, {
+            await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${selectedUser._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,9 +108,10 @@ const Users = () => {
     };
 
     const handleDelete = async (rowData) => {
+        console.log(rowData);
         if (window.confirm(`Are you sure you want to delete ${rowData.fullName}?`)) {
             try {
-                await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${rowData.userId}`, { // Use userId for DELETE request
+                await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${rowData._id}`, { // Use userId for DELETE request
                     method: 'DELETE',
                 });
 
@@ -115,11 +122,6 @@ const Users = () => {
                 toast.current.show({ severity: 'error', summary: 'Error', detail: 'There was an error deleting the user.', life: 3000 }); // Show error notification
             }
         }
-    };
-
-    const handleReject = (rowData) => {
-        console.log(`Rejected ${rowData.userName}`);
-        // Implement rejection logic here if needed
     };
 
     const onUserSelect = (e) => {
@@ -150,7 +152,7 @@ const Users = () => {
 
     return (
         <div className="current-users">            
-            <Toast ref={toast} />
+            <Toast ref={toast} /> {/* Add Toast component */}
             <h2>Current Users</h2>
             <h4>All the registered users will be present here!</h4>
             <DataTable value={usersData} paginator rows={15} className="table-padding">

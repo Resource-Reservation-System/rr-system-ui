@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Checkbox } from 'primereact/checkbox';
@@ -8,19 +8,33 @@ import 'primeicons/primeicons.css';
 
 const Approval = () => {
     const [myApprovals, setMyApprovals] = useState([]);
+    const [reservations, setReservations] = useState([]); // State for reservations
 
-    const alertsData = [
-        { id: 1, component: 'Raspberry PI', student: "Jimmy", purpose: "Internal Project", bookingDate: "5-05-2024" },
-        { id: 3, component: '3D Printer', student: "Bob", purpose: "Research", bookingDate: "20-06-2024" },
-        { id: 4, component: 'VR Headset', student: "Charlie", purpose: "Testing", bookingDate: "15-07-2024" },
-        { id: 5, component: 'Raspberry Pi', student: "David", purpose: "Learning", bookingDate: "22-07-2024" },
-        { id: 6, component: 'Laptop', student: "Eva", purpose: "Programming", bookingDate: "10-08-2024" },
-        { id: 7, component: 'Arduino', student: "Frank", purpose: "Prototype", bookingDate: "05-09-2024" },
-        { id: 8, component: '3D Printer', student: "Grace", purpose: "Design", bookingDate: "18-09-2024" },
-        { id: 9, component: 'Raspberry Pi', student: "Henry", purpose: "Project Testing", bookingDate: "10-10-2024" },
-        { id: 10, component: 'VR Headset', student: "Ivy", purpose: "Simulation", bookingDate: "01-11-2024" },
-        { id: 11, component: 'Laptop', student: "Jack", purpose: "Development", bookingDate: "12-11-2024" }
-    ];
+    useEffect(() => {
+        fetchReservations(); // Fetch reservations on mount
+    }, []);
+
+    const fetchReservations = async () => {
+        const labIdInCharge = localStorage.getItem('labIdInCharge');
+        try {
+            const response = await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/requests/?labId=${labIdInCharge}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch reservations');
+            }
+
+            const data = await response.json();
+            setReservations(data); // Set fetched reservations to state
+        } catch (error) {
+            console.error('Error fetching reservations:', error);
+        }
+    };
 
     const renderOptions = (rowData) => {
         return (
@@ -30,7 +44,6 @@ const Approval = () => {
                     className="p-button-text" 
                     onClick={() => handleApprove(rowData)} 
                 />
-
                 <Button 
                     icon="pi pi-times"
                     className="p-button-text" 
@@ -41,13 +54,13 @@ const Approval = () => {
     };
 
     const handleApprove = (rowData) => {
-        console.log(`Delete ${rowData.component}`);
-        // Implement delete logic here
+        console.log(`Approved ${rowData.component}`);
+        // Implement approve logic here
     };
 
     const handleReject = (rowData) => {
-        console.log(`Delete ${rowData.component}`);
-        // Implement delete logic here
+        console.log(`Rejected ${rowData.component}`);
+        // Implement reject logic here
     };
 
     const onComponentSelect = (e) => {
@@ -62,7 +75,7 @@ const Approval = () => {
 
     const toggleAllComponents = (e) => {
         if (e.checked) {
-            setMyApprovals(alertsData.map(item => item.id));
+            setMyApprovals(reservations.map(item => item.id)); // Use id for selection
         } else {
             setMyApprovals([]);
         }
@@ -72,7 +85,7 @@ const Approval = () => {
         <div className="my-components">            
             <h2>Approve/Reject Requests</h2>
             <h4>All your request status will be present here!</h4>
-            <DataTable value={alertsData} paginator rows={15} className="table-padding">
+            <DataTable value={reservations} paginator rows={15} className="table-padding">
                 <Column 
                     body={(rowData) => (
                         <Checkbox 
@@ -82,12 +95,12 @@ const Approval = () => {
                             checked={myApprovals.includes(rowData.id)} 
                         />
                     )} 
-                    header={<Checkbox inputId="cb_all" onChange={toggleAllComponents} checked={myApprovals.length === alertsData.length} />} 
+                    header={<Checkbox inputId="cb_all" onChange={toggleAllComponents} checked={myApprovals.length === reservations.length} />} 
                 />
-                <Column field="component" header="Component" />
-                <Column field="student" header="Requested By" />
+                <Column field="component.name" header="Component" />
+                <Column field="userId.fullName" header="Requested By" />
                 <Column field="purpose" header="Purpose" />
-                <Column field="bookingDate" header="Booking Date" />
+                <Column field="createdAt" header="Booking Date" />
                 <Column body={renderOptions} />
             </DataTable>
         </div>
