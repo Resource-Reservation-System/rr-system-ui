@@ -7,15 +7,14 @@ import './ComponentDetail.css';
 const ComponentDetail = () => {
     const location = useLocation(); 
     const item = location.state; 
-    const toast = useRef(null); // Create a reference for the toast component
-    const navigate = useNavigate(); // Hook to navigate programmatically
+    const toast = useRef(null);
+    const navigate = useNavigate();
 
     const [purpose, setPurpose] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
 
     const handleSubmit = async () => {
-        // Get userId from localStorage or another source
         const userId = localStorage.getItem('userId');
 
         try {
@@ -41,27 +40,25 @@ const ComponentDetail = () => {
             }
 
             console.log('Request submitted successfully');
-            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Request submitted successfully!', life: 3000 }); // Show success toast
+            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Request submitted successfully!', life: 2000 });
             
-            // Reset form fields
             setPurpose('');
             setFromDate('');
             setToDate('');
 
-            // Wait for the toast to display before navigating
             setTimeout(() => {
-                navigate('/rrs/home'); // Adjust this path as needed
-            }, 2000); // Wait for 3 seconds (3000 milliseconds) before navigating
+                navigate('/rrs/home');
+            }, 2000);
             
         } catch (error) {
             console.error('Error creating request:', error);
-            toast.current.show({ severity: 'error', summary: 'Error', detail: 'Failed to submit request.', life: 3000 }); // Show error toast
+            toast.current.show({ severity: 'error', summary: 'Error', detail: 'Failed to submit request.', life: 2000 });
         }
     };
 
     return (
         <div className="card-detail">
-            <Toast ref={toast} /> {/* Add Toast component */}
+            <Toast ref={toast} />
             {item ? (
                 <>
                     <h1>{item.name}</h1>

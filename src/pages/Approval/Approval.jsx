@@ -8,10 +8,10 @@ import 'primeicons/primeicons.css';
 
 const Approval = () => {
     const [myApprovals, setMyApprovals] = useState([]);
-    const [reservations, setReservations] = useState([]); // State for reservations
+    const [reservations, setReservations] = useState([]);
 
     useEffect(() => {
-        fetchReservations(); // Fetch reservations on mount
+        fetchReservations();
     }, []);
 
     const fetchReservations = async () => {
@@ -30,7 +30,7 @@ const Approval = () => {
             }
 
             const data = await response.json();
-            setReservations(data); // Set fetched reservations to state
+            setReservations(data);
         } catch (error) {
             console.error('Error fetching reservations:', error);
         }
@@ -75,7 +75,7 @@ const Approval = () => {
 
     const toggleAllComponents = (e) => {
         if (e.checked) {
-            setMyApprovals(reservations.map(item => item.id)); // Use id for selection
+            setMyApprovals(reservations.map(item => item.id)); 
         } else {
             setMyApprovals([]);
         }
