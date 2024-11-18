@@ -127,6 +127,7 @@ const Home = () => {
                             <div className="card-text">
                                 <h4 className="component-title">{component.name}</h4>
                                 <p className="component-description">{component.description}</p>
+                                <p className="component-description">{component.quantity} left</p>
                             </div>
                             <div>
                                 <Button icon="pi pi-plus" className="p-button-success" onClick={() => handleButtonClick(component)} />

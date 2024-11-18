@@ -33,8 +33,8 @@ const MyComponents = () => {
 
             const data = await response.json();
 
-            const approved = data.filter(request => request.status === 'Approved' && request.inHold === true);
-            const others = data.filter(request => !(request.status === 'Approved'));
+            const approved = data.filter(request => request.status === 'approved' && request.inHold === true);
+            const others = data.filter(request => !(request.status === 'approved'));
 
             setApprovedRequests(approved);
             setOtherRequests(others);
@@ -42,6 +42,12 @@ const MyComponents = () => {
             console.error('Error fetching user requests:', error);
             toast.current.show({ severity: 'error', summary: 'Error', detail: 'Failed to load requests.', life: 3000 });
         }
+    };
+
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
     return (
@@ -55,19 +61,20 @@ const MyComponents = () => {
                 <Column field="toDate" header="To Date" />
                 <Column body={(rowData) => (
                     <div>
-                        <Button icon="pi pi-pencil" className="p-button-text" onClick={() => handleEdit(rowData)} />
-                        <Button icon="pi pi-trash" className="p-button-text" onClick={() => handleDelete(rowData)} />
+                        <Button icon="pi pi-directions-alt" className="p-button-text" onClick={() => handleReturn(rowData)} />
                     </div>
                 )} header="Actions" />
             </DataTable>
 
-            <h2>Resource Requests</h2>
+            <h2>Pending Resource Requests</h2>
             <h4>All your past component log will be present here!</h4>
             <DataTable value={otherRequests} paginator rows={5} className="table-padding">
                 <Column field="component.name" header="Component" />
                 <Column field="status" header="Request Status" />
                 <Column field="purpose" header="Purpose" />
-                <Column field="createdAt" header="Date" />
+                <Column field="fromDate" header="From Date" body={(rowData) => formatDate(rowData.fromDate)}/>
+                <Column field="toDate" header="To Date" body={(rowData) => formatDate(rowData.toDate)}/>
+                <Column field="createdAt" header="Booking Date" />
                 <Column body={(rowData) => (
                     <div>
                         <Button icon="pi pi-pencil" className="p-button-text" onClick={() => handleEdit(rowData)} />
