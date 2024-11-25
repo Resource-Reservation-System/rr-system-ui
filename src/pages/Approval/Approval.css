@@ -7,6 +7,19 @@ h2 {
     margin-bottom: 0 !important;
 }
 
+.approval-icon, .p-paginator-page {
+    color: #23313F;
+    font-weight: bold;
+}
+
+.p-paginator-page {
+    font-weight: normal;
+}
+
+.pi-times {
+    border: none !important;
+}
+
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: none !important;
 }
@@ -21,9 +34,35 @@ h2 {
 }
 
 .pi-times {
-    border: 0.5px solid rgb(6, 128, 185);
     padding: 3px;
     font-size: 10px;
     font-weight: bold;
     border-radius: 5px;
+}
+
+.p-dialog-footer div.p-button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+}
+
+.reject-proceed {
+    background-color: #1B2734;
+    font-size: 12px !important;
+    color: #fff;
+    border: none;
+}
+
+.reject-cancel {
+    border: 1px solid #1B2734;
+    background-color: none !important;
+    color: #1B2734;
+    border-radius: 2;
+    font-size: 12px !important;
+}
+
+.rrs-table-label {
+    color: #84848b;
+    font-size: 15px;
 }

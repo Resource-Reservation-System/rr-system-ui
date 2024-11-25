@@ -39,9 +39,9 @@ const LandingPage = () => {
                     
                     <button 
                         className="btn-learn-more" 
-                        onClick={() => navigate('/')}
+                        onClick={() => window.open('https://web.postman.co/workspace/bff20aab-47ac-42c7-8455-e366cbad8792/overview', '_blank')}
                     >
-                        Learn More
+                        API Documentation
                         <i className="pi pi-arrow-right" style={{ marginLeft: '8px' }}></i>
                     </button>
                 </div>

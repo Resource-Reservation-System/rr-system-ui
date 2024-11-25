@@ -23,7 +23,9 @@ const SidebarMenu = ({ visible, onHide }) => {
             localStorage.removeItem('userId');
             localStorage.removeItem('username');
             localStorage.removeItem('role'); // Remove role on logout
-            navigate('/login');
+            
+            onHide();
+            navigate('/');
         } catch (error) {
             console.error('Logout failed:', error);
         }
@@ -108,7 +110,7 @@ const SidebarMenu = ({ visible, onHide }) => {
                 )}
 
                 {/* Render Logout option */}
-                <li onClick={handleLogout}>
+                <li onClick={handleLogout} >
                     <a href="#" className="sidebar-link">
                         <i className="pi pi-sign-out" style={{ marginRight: '8px' }}></i>
                         Logout

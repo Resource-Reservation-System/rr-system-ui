@@ -1,0 +1,40 @@
+.sub-head {
+    color: #6b6a6a;
+    font-size: 15px;
+}
+
+
+h1{
+    margin-bottom: 0;
+}
+
+.trends-page {
+    padding: 20px;
+}
+
+.trends-page h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.sub-head {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1rem;
+}
+
+
+.charts-container {
+    display: flex;
+    justify-content: space-between; /* Space between charts */
+    flex-wrap: wrap; /* Stacks charts on smaller screens */
+    gap: 20px;
+}
+
+.chart-item {
+    flex: 1 1 45%; /* Two charts side by side, each taking up 45% width */
+    min-width: 300px; /* Ensure a minimum width for smaller screens */
+    max-width: 600px; /* Optional cap on the maximum width */
+    height: 400px; /* Consistent height for charts */
+}

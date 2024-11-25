@@ -62,7 +62,7 @@ const LoginPage = () => {
                 <div className="logo-container">
                     <img src="/login.svg" alt="Logo" className="logo" />
                 </div>
-                <h1 className="login-title">Login with your Institute Email ID</h1>
+                <h1 className="login-title">Login with your NITC Email ID</h1>
                 <p className="login-subtext">Enter the details below to login</p>
 
                 <div className="input-container">
