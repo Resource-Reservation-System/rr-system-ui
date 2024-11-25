@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Toast } from 'primereact/toast';
 import '../LoginPage/LoginPage.css'; 
+import { Toast } from 'primereact/toast';
 
 const SignupPage = () => {
     const navigate = useNavigate();
-    const toast = React.useRef(null);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState(''); // Error message state
+    const toast = useRef(null);
 
     const handleSignup = async () => {
+        // Reset error message
+        setErrorMessage('');
+
+        // Validate email format
+        if (!email.endsWith('@nitc.ac.in')) {
+            setErrorMessage('Enter a valid email ID');
+            return;
+        }
+
+        // Validate passwords match
         if (password !== confirmPassword) {
-            toast.current.show({ severity: 'error', summary: 'Error', detail: 'Passwords do not match'});
+            setErrorMessage('Passwords do not match');
             return;
         }
 
@@ -35,18 +46,23 @@ const SignupPage = () => {
             }
 
             const data = await response.json();
-            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Registration successful!', life: 3000 });
-            setName('');
-            setEmail('');
-            setPassword('');
+            toast.current.show({ severity: 'success', summary: 'Success', detail: `Registred Successfully!`, life: 1500 });
+
+            setTimeout(() => {
+                navigate('/login');
+            }, 1500); 
+
         } catch (error) {
-            toast.current.show({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 });
+            setErrorMessage(error.message || 'An error occurred during registration.');
         }
+    };
+
+    const handleInputChange = () => {
+        setErrorMessage('');
     };
 
     return (
         <div className="signup-page">
-            <Toast ref={toast} className='toast'/>
             <div className="card-container">
                 <div className="logo-container">
                     <img src="/login.svg" alt="Logo" className="logo" />
@@ -60,7 +76,7 @@ const SignupPage = () => {
                         type="text" 
                         placeholder="Your Name" 
                         value={name} 
-                        onChange={(e) => setName(e.target.value)} 
+                        onChange={(e) => { setName(e.target.value); handleInputChange(); }} 
                         className="input-field"
                     />
                     
@@ -69,7 +85,7 @@ const SignupPage = () => {
                         type="email" 
                         placeholder="xyz@nitc.ac.in" 
                         value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
+                        onChange={(e) => { setEmail(e.target.value); handleInputChange(); }} 
                         className="input-field"
                     />
                     
@@ -78,7 +94,7 @@ const SignupPage = () => {
                         type="password" 
                         placeholder="**************" 
                         value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
+                        onChange={(e) => { setPassword(e.target.value); handleInputChange(); }} 
                         className="input-field"
                     />
 
@@ -87,7 +103,7 @@ const SignupPage = () => {
                         type="password" 
                         placeholder="**************" 
                         value={confirmPassword} 
-                        onChange={(e) => setConfirmPassword(e.target.value)} 
+                        onChange={(e) => { setConfirmPassword(e.target.value); handleInputChange(); }} 
                         className="input-field"
                     />
                 </div>
@@ -96,9 +112,14 @@ const SignupPage = () => {
                     Sign Up
                 </button>
 
+                {/* Display error message */}
+                {errorMessage && <p className="error-message" style={{ color: 'red' }}>{errorMessage}</p>}
+
                 <p className="signup-text">
                     Already have an account? <span className="create-account" onClick={() => navigate('/login')}>Login</span>
                 </p>
+
+                <Toast ref={toast} />
             </div>
         </div>
     );

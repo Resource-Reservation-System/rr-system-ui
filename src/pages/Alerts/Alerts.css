@@ -21,9 +21,21 @@ h2 {
 }
 
 .pi-times {
-    border: 0.5px solid rgb(6, 128, 185);
     padding: 3px;
     font-size: 10px;
     font-weight: bold;
     border-radius: 5px;
+}
+
+.unread-row {
+    font-weight: bold;
+}
+
+.visible-or-not-icon {
+    color: #23313F !important;
+
+}
+
+.unread-notification {
+    background-color: #ebebeb;
 }

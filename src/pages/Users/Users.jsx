@@ -55,7 +55,7 @@ const Users = () => {
                 <Button 
                     icon="pi pi-times"
                     className="p-button-text" 
-                    onClick={() => handleDelete(rowData)} // Call delete function
+                    onClick={() => handleDelete(rowData)}
                 />
             </div>
         );
@@ -77,11 +77,12 @@ const Users = () => {
             // Prepare data for updating user
             const updatedData = { 
                 labInCharge: selectedLab ? selectedLab.name : null,
-                role: selectedLab && selectedLab.id !== null ? 'staff' : selectedUser.role // Update role to staff if a valid lab is assigned
+                labIdInCharge: selectedLab ? selectedLab._id : null, // Store lab ID
+                role: selectedLab && selectedLab._id !== null ? 'staff' : selectedUser.role // Update role to staff if a valid lab is assigned
             };
 
             // Update labInCharge and role for the selected user
-            await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${selectedUser.userId}`, {
+            await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${selectedUser._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,9 +103,10 @@ const Users = () => {
     };
 
     const handleDelete = async (rowData) => {
+        console.log(rowData);
         if (window.confirm(`Are you sure you want to delete ${rowData.fullName}?`)) {
             try {
-                await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${rowData.userId}`, { // Use userId for DELETE request
+                await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/users/${rowData._id}`, { // Use userId for DELETE request
                     method: 'DELETE',
                 });
 
@@ -117,11 +119,7 @@ const Users = () => {
         }
     };
 
-    const handleReject = (rowData) => {
-        console.log(`Rejected ${rowData.userName}`);
-        // Implement rejection logic here if needed
-    };
-
+    //not needed currently
     const onUserSelect = (e) => {
         let selectedIds = [...myApprovals];
         if (e.checked) {
@@ -176,18 +174,18 @@ const Users = () => {
             <Dialog 
                 visible={displayDialog} 
                 onHide={() => setDisplayDialog(false)} 
-                style={{ width: '20vw'}} // Adjust width as needed
+                style={{ width: '20vw'}}
             >
                 <div>
                     <label className="label" htmlFor="lab">{`${selectedUser ? selectedUser.fullName : ''}`}: </label>
                     <Dropdown 
                         id="lab"
                         value={selectedLab}
-                        options={availableLabs} // Array of labs fetched from API
+                        options={availableLabs}
                         onChange={(e) => setSelectedLab(e.value)}
                         placeholder="Select a Lab"
                         className='dropdown'
-                        optionLabel="name" // Adjust based on your data structure
+                        optionLabel="name"
                     />
                 </div>
                 <Button label="Assign Lab" icon="pi pi-check" className="user-edit" onClick={handleAccept} />

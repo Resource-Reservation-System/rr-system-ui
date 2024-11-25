@@ -10,8 +10,8 @@ import Users from './pages/Users/Users';
 import MyComponents from './pages/MyComponents/MyComponents';
 import Alerts from './pages/Alerts/Alerts';
 import Approval from './pages/Approval/Approval';
-import Trends from './pages/Trends';
-import CardDetail from "./pages/CardDetail/CardDetail";
+import Trends from './pages/Trends/Trends';
+import ComponentDetail from "./pages/ComponentDetail/ComponentDetail";
 import ProtectedRoute from './pages/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -39,7 +39,7 @@ const App = () => {
                     <Route element={<ProtectedRoute />}>
                         <Route path="/rrs/home" element={<Home />} />
                         <Route path="/rrs/users" element={<Users />} />
-                        <Route path="/rrs/card-detail" element={<CardDetail />} />
+                        <Route path="/rrs/component-detail" element={<ComponentDetail />} />
                         <Route path="/rrs/my-components" element={<MyComponents />} />
                         <Route path="/rrs/alerts" element={<Alerts />} />
                         <Route path="/rrs/approval" element={<Approval />} />

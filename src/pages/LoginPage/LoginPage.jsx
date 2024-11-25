@@ -39,6 +39,10 @@ const LoginPage = () => {
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('role', data.role);
+            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('fullName', data.fullName);
+            localStorage.setItem('labInCharge', data.labInCharge);
+            localStorage.setItem('labIdInCharge', data.labIdInCharge);
             navigate('/rrs/home');
         } catch (error) {
             setErrorMessage(error.message); 
@@ -58,7 +62,7 @@ const LoginPage = () => {
                 <div className="logo-container">
                     <img src="/login.svg" alt="Logo" className="logo" />
                 </div>
-                <h1 className="login-title">Login with your Institute Email ID</h1>
+                <h1 className="login-title">Login with your NITC Email ID</h1>
                 <p className="login-subtext">Enter the details below to login</p>
 
                 <div className="input-container">
