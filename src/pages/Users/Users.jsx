@@ -27,7 +27,6 @@ const Users = () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_SERVICE_URL}/api/labs`);
             const data = await response.json();
-            console.log(data)
             // Add an option for resetting lab assignment
             setAvailableLabs([{ name: 'No Lab Assigned', id: null }, ...data]); // Assuming each lab has a name and id property
         } catch (error) {
@@ -56,7 +55,7 @@ const Users = () => {
                 <Button 
                     icon="pi pi-times"
                     className="p-button-text" 
-                    onClick={() => handleDelete(rowData)} // Call delete function
+                    onClick={() => handleDelete(rowData)}
                 />
             </div>
         );
@@ -75,10 +74,6 @@ const Users = () => {
         }
 
         try {
-            console.log("selected lab")
-            console.log(selectedLab)
-            console.log("selected user")
-            console.log(selectedUser)
             // Prepare data for updating user
             const updatedData = { 
                 labInCharge: selectedLab ? selectedLab.name : null,
@@ -124,6 +119,7 @@ const Users = () => {
         }
     };
 
+    //not needed currently
     const onUserSelect = (e) => {
         let selectedIds = [...myApprovals];
         if (e.checked) {
@@ -152,7 +148,7 @@ const Users = () => {
 
     return (
         <div className="current-users">            
-            <Toast ref={toast} /> {/* Add Toast component */}
+            <Toast ref={toast} />
             <h2>Current Users</h2>
             <h4>All the registered users will be present here!</h4>
             <DataTable value={usersData} paginator rows={15} className="table-padding">
@@ -178,18 +174,18 @@ const Users = () => {
             <Dialog 
                 visible={displayDialog} 
                 onHide={() => setDisplayDialog(false)} 
-                style={{ width: '20vw'}} // Adjust width as needed
+                style={{ width: '20vw'}}
             >
                 <div>
                     <label className="label" htmlFor="lab">{`${selectedUser ? selectedUser.fullName : ''}`}: </label>
                     <Dropdown 
                         id="lab"
                         value={selectedLab}
-                        options={availableLabs} // Array of labs fetched from API
+                        options={availableLabs}
                         onChange={(e) => setSelectedLab(e.value)}
                         placeholder="Select a Lab"
                         className='dropdown'
-                        optionLabel="name" // Adjust based on your data structure
+                        optionLabel="name"
                     />
                 </div>
                 <Button label="Assign Lab" icon="pi pi-check" className="user-edit" onClick={handleAccept} />
