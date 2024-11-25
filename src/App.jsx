@@ -10,7 +10,7 @@ import Users from './pages/Users/Users';
 import MyComponents from './pages/MyComponents/MyComponents';
 import Alerts from './pages/Alerts/Alerts';
 import Approval from './pages/Approval/Approval';
-import Trends from './pages/Trends';
+import Trends from './pages/Trends/Trends';
 import ComponentDetail from "./pages/ComponentDetail/ComponentDetail";
 import ProtectedRoute from './pages/ProtectedRoute/ProtectedRoute';
 import './App.css';
